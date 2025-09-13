@@ -1,4 +1,4 @@
-import { calculatePortfolioPerformance, PortfolioPerformance } from "../src/portfolio/portfolioPerformance";
+import { calculatePortfolioPerformance, PortfolioPerformance, getLargestHolding, Asset } from "../src/portfolio/portfolioPerformance";
 
 describe("calculatePortfolioPerformance", () => {
   it("should return significant gain when profit is more than 20%", () => {
@@ -20,5 +20,23 @@ describe("calculatePortfolioPerformance", () => {
     expect(result.profitOrLoss).toBe(0);
     expect(result.percentageChange).toBe(0);
     expect(result.performanceSummary).toBe("The portfolio has no change.");
+  });
+});
+
+describe("getLargestHolding", () => {
+  it("should return null if the assets array is empty", () => {
+    const assets: Asset[] = [];
+    const result = getLargestHolding(assets);
+    expect(result).toBeNull();
+  });
+
+  it("should return the asset with the highest value", () => {
+    const assets: Asset[] = [
+      { name: "House", value: 50000 },
+      { name: "Stocks", value: 30000 },
+      { name: "Bonds", value: 20000 },
+    ];
+    const result = getLargestHolding(assets);
+    expect(result).toEqual({ name: "House", value: 50000 });
   });
 });
