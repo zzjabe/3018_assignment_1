@@ -43,3 +43,20 @@ export function calculatePortfolioPerformance(
         performanceSummary,
     };
 }
+
+export interface Asset {
+  name: string;
+  value: number;
+}
+
+export function getLargestHolding(assets: Asset[]): Asset | null {
+  if (assets.length === 0) return null; 
+
+  let maxAsset: Asset = assets[0];
+  for (const asset of assets) {
+    if (asset.value > maxAsset.value) {
+      maxAsset = asset;
+    }
+  }
+  return maxAsset;
+}
