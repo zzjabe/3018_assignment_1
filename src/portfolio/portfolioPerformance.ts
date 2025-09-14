@@ -60,3 +60,17 @@ export function getLargestHolding(assets: Asset[]): Asset | null {
   }
   return maxAsset;
 }
+
+export interface AssetAllocation {
+  name: string;
+  percentage: number;
+}
+
+export function calculateAssetAllocation(assets: Asset[]): AssetAllocation[] {
+  const totalValue: number = assets.reduce((sum, asset) => sum + asset.value, 0);
+
+  return assets.map(asset => ({
+    name: asset.name,
+    percentage: (asset.value / totalValue) * 100,
+  }));
+}
