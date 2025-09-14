@@ -33,7 +33,7 @@ describe("Portfolio routes", () => {
             .query({ assets });
         expect(res.status).toBe(200);
         expect(res.body.allocation[0]).toHaveProperty("percentage");
-        const total = res.body.allocation.reduce((s: number, a: any) => s + a.percentage, 0);
+        const total: number = res.body.allocation.reduce((s: number, a: any) => s + a.percentage, 0);
         expect(Math.round(total)).toBe(100);
     });
 });
