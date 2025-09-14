@@ -33,22 +33,22 @@ describe("getLargestHolding", () => {
 
     it("should return the asset with the highest value", () => {
         const assets: Asset[] = [
-            { name: "House", value: 50000 },
+            { name: "Houses", value: 50000 },
             { name: "Stocks", value: 30000 },
             { name: "Bonds", value: 20000 },
         ];
         const result = getLargestHolding(assets);
-        expect(result).toEqual({ name: "House", value: 50000 });
+        expect(result).toEqual({ name: "Houses", value: 50000 });
     });
 
     it("should return the asset with the first highest value", () => {
         const assets: Asset[] = [
-            { name: "House", value: 50000 },
+            { name: "Houses", value: 50000 },
             { name: "Stocks", value: 50000 },
             { name: "Bonds", value: 20000 },
         ];
         const result = getLargestHolding(assets);
-        expect(result).toEqual({ name: "House", value: 50000 });
+        expect(result).toEqual({ name: "Houses", value: 50000 });
     });
 });
 
@@ -57,7 +57,7 @@ describe("calculateAssetAllocation", () => {
         const assets: Asset[] = [
             { name: "Stocks", value: 5000 },
             { name: "Bonds", value: 3000 },
-            { name: "House", value: 2000 },
+            { name: "Houses", value: 2000 },
         ];
 
         const result: AssetAllocation[] = calculateAssetAllocation(assets);
@@ -65,7 +65,7 @@ describe("calculateAssetAllocation", () => {
         expect(result).toEqual([
             { name: "Stocks", percentage: 50 },
             { name: "Bonds", percentage: 30 },
-            { name: "House", percentage: 20 },
+            { name: "Houses", percentage: 20 },
         ]);
     });
 
@@ -73,7 +73,7 @@ describe("calculateAssetAllocation", () => {
         const assets: Asset[] = [
             { name: "Stocks", value: 3000 },
             { name: "Bonds", value: 3000 },
-            { name: "House", value: 3000 },
+            { name: "Houses", value: 3000 },
         ];
 
         const result: AssetAllocation[] = calculateAssetAllocation(assets);
@@ -81,7 +81,7 @@ describe("calculateAssetAllocation", () => {
         expect(result).toEqual([
             { name: "Stocks", percentage: 33 },
             { name: "Bonds", percentage: 33 },
-            { name: "House", percentage: 33 },
+            { name: "Houses", percentage: 33 },
         ]);
     });
    
