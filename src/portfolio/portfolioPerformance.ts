@@ -1,10 +1,10 @@
 // Define an interface
 export interface PortfolioPerformance {
-  initialInvestment: number;
-  currentValue: number;
-  profitOrLoss: number;
-  percentageChange: number;
-  performanceSummary: string;
+    initialInvestment: number;
+    currentValue: number;
+    profitOrLoss: number;
+    percentageChange: number;
+    performanceSummary: string;
 }
 
 // Add parament to connect the interface
@@ -45,32 +45,33 @@ export function calculatePortfolioPerformance(
 }
 
 export interface Asset {
-  name: string;
-  value: number;
+    name: string;
+    value: number;
 }
 
 export function getLargestHolding(assets: Asset[]): Asset | null {
-  if (assets.length === 0) return null; 
+    if (assets.length === 0) return null; 
 
-  let maxAsset: Asset = assets[0];
-  for (const asset of assets) {
-    if (asset.value > maxAsset.value) {
-      maxAsset = asset;
+    let maxAsset: Asset = assets[0];
+    for (const asset of assets) {
+        if (asset.value > maxAsset.value) {
+        maxAsset = asset;
+        }
     }
-  }
-  return maxAsset;
+    return maxAsset;
 }
 
 export interface AssetAllocation {
-  name: string;
-  percentage: number;
+    name: string;
+    percentage: number;
 }
 
 export function calculateAssetAllocation(assets: Asset[]): AssetAllocation[] {
-  const totalValue: number = assets.reduce((sum, asset) => sum + asset.value, 0);
+    if (!assets || assets.length === 0) return [];
+    const totalValue: number = assets.reduce((sum, asset) => sum + asset.value, 0);
 
-  return assets.map(asset => ({
-    name: asset.name,
-    percentage: (asset.value / totalValue) * 100,
-  }));
+    return assets.map(asset => ({
+        name: asset.name,
+        percentage: Math.round((asset.value / totalValue) * 100),
+    }));
 }
