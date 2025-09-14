@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import express, { Express, Request, Response } from "express";
 import { calculatePortfolioPerformance, PortfolioPerformance, getLargestHolding, Asset, 
     AssetAllocation, calculateAssetAllocation} from "../src/portfolio/portfolioPerformance";
 
@@ -6,14 +6,14 @@ import { calculatePortfolioPerformance, PortfolioPerformance, getLargestHolding,
 const app: Express = express();
 
 // Define a route
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
     res.send("Hello, World!");
 });
 
 /*
 1. Heath check endpoint
 */
-app.get("/api/v1/health", (req, res) => {
+app.get("/api/v1/health", (req: Request, res: Response) => {
     res.json({
         status: "OK",
         uptime: process.uptime(),
@@ -46,7 +46,7 @@ function parseAssetsQuery(q: any): Asset[] | null {
  GET /api/v1/portfolio/performance?initialInvestment=10000&currentValue=12000
  If no params provided, use defaults inside calculatePortfolioPerformance
 */
-app.get("/api/v1/portfolio/performance", (req, res) => {
+app.get("/api/v1/portfolio/performance", (req: Request, res: Response) => {
     const initial = req.query.initialInvestment ? Number(req.query.initialInvestment) : undefined;
     const current = req.query.currentValue ? Number(req.query.currentValue) : undefined;
 
@@ -66,9 +66,9 @@ app.get("/api/v1/portfolio/performance", (req, res) => {
 /*
 3. Largest holding endpoint
 GET /api/v1/portfolio/largest-holding?assets=[{"name":"Houses","value":100},{"name":"Stocks","value":200}]
-If assets not provided -> return example or error (choose your preference)
+If assets not provided -> return example
 */
-app.get("/api/v1/portfolio/largest-holding", (req, res) => {
+app.get("/api/v1/portfolio/largest-holding", (req: Request, res: Response) => {
     const raw = req.query.assets;
     const parsed = parseAssetsQuery(raw);
 
@@ -90,7 +90,7 @@ app.get("/api/v1/portfolio/largest-holding", (req, res) => {
 4. Asset allocation endpoint
 GET /api/v1/portfolio/allocation?assets=[{"name":"Houses","value":100},{"name":"Stocks","value":200}]
 */
-app.get("/api/v1/portfolio/allocation", (req, res) => {
+app.get("/api/v1/portfolio/allocation", (req: Request, res: Response) => {
     const raw = req.query.assets;
     const parsed = parseAssetsQuery(raw);
 
